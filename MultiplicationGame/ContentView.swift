@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var firstNumber: Int = Int.random(in: 1...9)
     @State private var secondNumber: Int = Int.random(in: 1...9)
     
+    @State private var displayAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     
@@ -31,6 +32,11 @@ struct ContentView: View {
                 Button("Submit", action: submitAnswer)
             }
         }
+        .alert(alertTitle, isPresented: $displayAlert) {
+            Button("OK", role: .cancel, action: newGame)
+        } message: {
+            Text(alertMessage)
+        }
     }
     
     func submitAnswer() {
@@ -44,6 +50,12 @@ struct ContentView: View {
             alertTitle = "That's not it"
             alertMessage = "The right answer is \(answer)."
         }
+        
+        displayAlert.toggle()
+        
+    }
+    
+    func newGame() {
         
     }
 }
