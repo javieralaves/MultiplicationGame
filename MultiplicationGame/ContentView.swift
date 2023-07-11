@@ -56,7 +56,9 @@ struct ContentView: View {
     }
     
     func newGame() {
-        
+        userResponse = 0
+        firstNumber = Int.random(in: 1...9)
+        secondNumber = Int.random(in: 1...9)
     }
 }
 
