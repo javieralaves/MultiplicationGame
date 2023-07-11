@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var userResponse: String = "0"
+    @State private var userResponse: Int = 0
     @State private var firstNumber: Int = Int.random(in: 1...9)
     @State private var secondNumber: Int = Int.random(in: 1...9)
+    
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
     
     var body: some View {
         VStack {
@@ -21,7 +24,7 @@ struct ContentView: View {
                         .fontWeight(.semibold)
                 }
                 Section ("Your answer") {
-                    TextField("Answer", text: $userResponse)
+                    TextField("Answer", value: $userResponse, format: .number)
                 }
                 .keyboardType(.numberPad)
                 
@@ -31,6 +34,16 @@ struct ContentView: View {
     }
     
     func submitAnswer() {
+        
+        let answer = firstNumber * secondNumber
+        
+        if userResponse == answer {
+            alertTitle = "Well done!"
+            alertMessage = "Your answer is correct."
+        } else {
+            alertTitle = "That's not it"
+            alertMessage = "The right answer is \(answer)."
+        }
         
     }
 }
