@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var firstNumber: Int = Int.random(in: 1...9)
     @State private var secondNumber: Int = Int.random(in: 1...9)
     
+    @State private var numberOfQuestions: Int = 0
+        
     @State private var displayAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -20,10 +22,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Form {
-                Section {
+                Section ("Number table") {
+                    Stepper("Pick number: \(firstNumber)", value: $firstNumber)
+                }
+                
+                Section ("Question") {
                     Text("What's \(firstNumber) x \(secondNumber)?")
                         .fontWeight(.semibold)
                 }
+                
                 Section ("Your answer") {
                     TextField("Answer", value: $userResponse, format: .number)
                 }
@@ -57,7 +64,6 @@ struct ContentView: View {
     
     func newGame() {
         userResponse = 0
-        firstNumber = Int.random(in: 1...9)
         secondNumber = Int.random(in: 1...9)
     }
 }
